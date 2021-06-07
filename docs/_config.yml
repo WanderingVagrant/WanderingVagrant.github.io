@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Sahil Bhalla's Projects
+title: My Personal Projects Portfolio
 email: s2bhalla@ucsd.edu
 description: >- # this means to ignore newlines until "baseurl:"
   This is a site I've created using github pages and jekyll to to showcase some of my projects and code.
@@ -28,6 +28,8 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  WanderingVagrant
 
+
+author: Sahil Bhalla
 # Build settings
 # theme: minima
 plugins:
