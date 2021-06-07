@@ -22,8 +22,8 @@ title: My Personal Projects Portfolio
 email: s2bhalla@ucsd.edu
 description: >- # this means to ignore newlines until "baseurl:"
   This is a site I've created using github pages and jekyll to to showcase some of my projects and code.
-  It's purpose is also to highlight my overall process and sources I used whil creating my own physics engine.
-  I'll be focusing mainly on this physics engine and dicussing the creation of physics engines in general.
+  It's purpose is also to highlight my overall process and sources I used while creating my own physics engine.
+  I'll be focusing mainly on this physics engine and discussing the creation of physics engines in general.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  WanderingVagrant
