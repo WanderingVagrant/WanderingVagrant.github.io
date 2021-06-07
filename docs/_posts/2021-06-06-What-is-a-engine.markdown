@@ -1,13 +1,18 @@
 ---
 layout: post
-title:  "My Physics Engine"
+title:  "What is a Physics Engine"
 #date:   2021-06-06 18:17:00 -0700
 categories: jekyll update
 ---
 Hi readers!    
-In this post, I'm going to discuss the how I made my physics engine at both a high level and low level.
+In this post, I'm going to discuss the basics of a physics engine, and give a basic overview different ways in which they are built.     
 
-Insert table of contents here
+- [The Absolute Basics](#the-absolute-basics)
+- [The Core Loop](#the-core-loop)
+- [Rigid Bodies vs Soft Bodies](#rigid-bodies-vs-soft-bodies)
+- [Movement](#movement)
+- [Collision Detection](#collision-detection)
+- [Collision Resolution](#collision-resolution)
 
 ## The Absolute Basics
 A physics engine is what it sounds like, the part of a program that simulates real-life physics. They can be used in many different contexts, from video games, to biomedical research, to CGI in the most popular movies. But why would someone need a physics engine, and what exactly can they do?    
