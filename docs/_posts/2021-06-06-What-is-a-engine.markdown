@@ -24,6 +24,7 @@ Another use, and the one my physics engine is based on, is for approximating the
 
 ## The Core Loop
 
+![image](images/PhysLoop.png)
 But how exactly does a video-game physics engine work? The most commonly used paradigm is by setting up a world where physics happens. Then you add some global constants like gravity or air resistance, and then you add in all the entities to populate the world and do physics on those objects.     
 
 The actual core loop of a physics engine looks somewhat like this on all the objects in the world. Calculate the new positions of all objects based on their current velocities, then detect collisions, and resolve those collisions with a change in momentum or force. However, each of these steps has few different widely used methods.
