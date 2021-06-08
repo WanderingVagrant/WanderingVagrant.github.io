@@ -33,7 +33,7 @@ Next, I built the overall world of the physics engine that would contain all the
 
 ## Game Objects
 
-![image](/assets/images/GameObject.png)
+![image](/assets/images/GameObject.png)   ![image](/assets/images/GameObject2.png)
 
 These are what describe each of the "physical" objects in the physics engine and they contain all the information about the object such as its position, shape, and other physical quantities. Using the physical quantities a Game Object can also advance itself an arbitrary amount of time and move accordingly, although it has no knowledge of other Game Objects so can't detect collisions. I decided to model GameObjects not as a limited set of simple shapes, but as any polygon by allowing them to have an array of any size to represent the vertices of the game object relative to its central position. This makes it really easy to move and rotate the game object since all I have to do is rotate the vertices relative to the center and translate the position vector to where I want it to go.
 
