@@ -7,8 +7,12 @@ categories: jekyll update
 Hi readers!    
 In this post, I'm going to discuss the how I made my physics engine at both a high level and low level. I chose to use C++ because it is the language in which most modern physics engines are built, and it is optimized to be fast compared to a language like python. 
 
-Insert table of contents here
-
+- [Vector Math](#vector-math)
+- [List](#list)
+- [The World](#the-world)
+- [Game Objects](#game-objects)
+- [Testing](#testing)
+  
 ## Vector Math
 
 The first class I built is the vector math system as all the position and movement information for the objects in my physics engine is handled through three dimensional vectors. The reason for this is that a vector is excellent model for 2D physics as most important characteristics about an object that can't be represented as a constant, can be represented by vectors. These properties include force, velocity, acceleration, and position. It is also very easy do basic operations like addition and subtraction with vectors as shown in the code. Its can do all vector operations such as the dot and cross product as well, and it can also compute the magnitude.
