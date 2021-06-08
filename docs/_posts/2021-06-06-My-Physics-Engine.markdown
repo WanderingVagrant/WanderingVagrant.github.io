@@ -5,59 +5,28 @@ title:  "My Physics Engine"
 categories: jekyll update
 ---
 Hi readers!    
-In this post, I'm going to discuss the how I made my physics engine at both a high level and low level.
+In this post, I'm going to discuss the how I made my physics engine at both a high level and low level. I chose to use C++ because it is the language in which most modern physics engines are built, and it is optimized to be fast compared to a language like python. 
 
 Insert table of contents here
 
-## The Absolute Basics
-A physics engine is what it sounds like, the part of a program that simulates real-life physics. They can be used in many different contexts, from video games, to biomedical research, to CGI in the most popular movies. But why would someone need a physics engine, and what exactly can they do?    
+## Vector Math
 
-One use most of you would have experienced already is in animating advanced CGI graphics in modern movies. Detailed 3d cloth and fluid moving is a very difficult thing to animate, and very time-consuming to do by hand, but with the help of a physics engine it can be done well and in less time.      
+The first class I built is the vector math system as all the position and movement information for the objects in my physics engine is handled through three dimensional vectors. The reason for this is that a vector is excellent model for 2D physics as most important characteristics about an object that can't be represented as a constant, can be represented by vectors. These properties include force, velocity, acceleration, and position. It is also very easy do basic operations like addition and subtraction with vectors as shown in the code. Its can do all vector operations such as the dot and cross product as well, and it can also compute the magnitude.
 
-Another use, and the one my physics engine is based on, is for approximating the movement of objects in video games according to real-life physics. Figuring out the trajectory of a bullet in a shooter and determining the movement of the main character in a platformer is all the work of a physics engine.     
+## List
 
+The next backing class I built before getting started on the actual physics engine was a list class to store all the objects in the engine. I could have used the STL list class and saved myself the effort, however I wanted to practice to construction of basic data structures. This list is a linked list which I chose because it has fast removal and addition compared to the array list which would eb useful when adding and removing objects to the world. It's random lookup is poor but that is fine since I would mostly be iterating through all the objects rather than lookup up a random one.
 
-## The Core Loop
+## The World
 
-But how exactly does a video-game physics engine work? The most commonly used paradigm is by setting up a world where physics happens. Then you add some global constants like gravity or air resistance, and then you add in all the entities to populate the world and do physics on those objects.     
+Next I built the overall world of of the physics engine that would contain all the game objects, and relevant fields that should belong to the world like air-resistance, the size of the time-step, and the function for the force field i.e. gravity. This is the class that calculates the basic forces on the objects, then moves them, then checks for and handles collisions. Each of these functions besides the force field actually delegates its actual operation to the game object or to another class so that the program preserves object orient design principle. In this way each game object actually moves itself when given all the information by the world. I haven't yet implemented collision detection or resolution yet, but I still have the methods int the structure so ideally all I need to do is fill in the body and it works.
 
-The actual core loop of a physics engine looks somewhat like this on all the objects in the world. Calculate the new positions of all objects based on their current velocities, then detect collisions, and resolve those collisions with a change in momentum or force. However, each of these steps has few different widely used methods.
+## Game Objects
 
-## Rigid Bodies vs Soft Bodies
+These are what describe each of the "physical" objects in the physics engine and they contain all the information about the object such as is position, shape, and other physical quantities. Using the physical quantities a Game Object can also advance itself an arbitrary amount of time and move accordingly, although it has no knowledge of other Game Objects so can't detect collisions. I decided to model GameObjects not as a limited set of simple shapes, but as any polygon by allowing them to have an array of any size to represent the vertices of the game object relative to its central position. This makes is really easy to move and rotate the game object since all I have to do is rotate the vertices relative to the center and translate the position vector to where I want it to go.
 
-For the first step in the loop, calculating the positions of the objects depends a lot on what those objects are, and they can generally be classified into two types. A rigid body, or a soft body. A rigid body is generally the type of object most used in physics classes.     
+## Testing
 
-They are incompressible objects made up of a set of shapes connected by unchangeable joints. Some examples would be a pendulum, a simple stick figure, and most objects in 2d simulation. Rigid bodies are the more simplified and unrealistic type of object since most real-life objects are compressible.     
+Finally this is the main files that actually uses the physics engine. For now its just running some tests but in the future it could be a simulator or a full game that uses the methods in my physics engine to handles its physics.     
 
-A soft body on the other hand is the opposite, and consists of components like springs or elastic materials and generally involve much more complex math to calculate the position and forces for. Some examples would be hair, clothes, and most objects in very realistic physics simulations.    
-
-This is why I will elaborate only on rigid body dynamics.
-
-## Movement
-
-For rigid bodies, the main types of motion that we need to account for are rotation and translation. Translation is simply moving the whole body in some direction along the center of mass and can be calculated by the simple equation from the velocity, d = vt.    
-
-However, there are many methods of different precisions for calculating the linear velocity as often the movement equations boil down to a series of differential equations that can't be solved directly quickly. Most physics engines use approximations like Euler's method or more accurate approximations like the Runge-Kutta methods. 
-
-Rotation however occurs whenever a force or impulse is applied at an angle relative to the center of rotation. Based on this angle, and the distance of the force to the center of rotation, and the moment of inertia, we can calculate the angular velocity and therefore the rotation. 
-
-Rotating in 2D as I implemented in my own physics engine is relatively simple as you just rotate something around a central point, but in 3d it becomes much harder. Different methods exist for 3D rotation from the simple Euler Angles that were initially devised, to the complex quaternions that are used in today's modern physics engines.
- 
-## Collision Detection
-
-A collision is when two objects touch each other or overlap, and in most games it provokes some kind of response, whether it gives you a power-up, or the car deforms spectacularly in a car crash simulation.   
-
-Detecting the collisions is a surprising challenge, however. One obvious method is to check if all possible pairs of objects are colliding, but this method is extremely inefficient because the time it takes increases with the square of the number of objects in the world. This is why most physics engines divide the task into two parts, broad phase and narrow phase.    
-
-In the broad phase, the focus is eliminating all objects that have no chance of colliding with each other such as those extremely far from each other.
-
-Then the narrow phase checks all the pairs of objects that actually have a chance of colliding. 
-
-## Collision Resolution
-
-The final step is collision resolution, what do we do now that we know objects are colliding.? Well in rigid bodies the basic answer is simple, they need to bounce off of each other. There are a few ways of calculating this, but all of them generally use the concept of constraints.     
-
-Constraints are limitations to an object’s degrees of freedom, or how it can move. They can be as simple as forcing two objects to remain a minimum distance apart, or more complicated like the limits to the motion of a human arm. A physics engine can use linear algebra with force or impulse to solve these constraints and find the final positions of the colliding objects.     
-
-That ends this basic overview of how physics engines work.
-
+Thanks for reading!
