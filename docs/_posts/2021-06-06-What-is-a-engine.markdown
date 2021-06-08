@@ -15,6 +15,9 @@ In this post, I'm going to discuss the basics of a physics engine, and give a ba
 - [Collision Resolution](#collision-resolution)
 
 ## The Absolute Basics
+
+![image](/assets/images/WorldObject.png)
+
 A physics engine is what it sounds like, the part of a program that simulates real-life physics. They can be used in many different contexts, from video games, to biomedical research, to CGI in the most popular movies. But why would someone need a physics engine, and what exactly can they do?    
 
 One use most of you would have experienced already is in animating advanced CGI graphics in modern movies. Detailed 3d cloth and fluid moving is a very difficult thing to animate, and very time-consuming to do by hand, but with the help of a physics engine it can be done well and in less time.      
@@ -24,12 +27,15 @@ Another use, and the one my physics engine is based on, is for approximating the
 
 ## The Core Loop
 
-![image](images/PhysLoop.png)
+![image](/assets/images/PhysLoop.png)     
+
 But how exactly does a video-game physics engine work? The most commonly used paradigm is by setting up a world where physics happens. Then you add some global constants like gravity or air resistance, and then you add in all the entities to populate the world and do physics on those objects.     
 
-The actual core loop of a physics engine looks somewhat like this on all the objects in the world. Calculate the new positions of all objects based on their current velocities, then detect collisions, and resolve those collisions with a change in momentum or force. However, each of these steps has few different widely used methods.
+The actual core loop of a physics engine looks somewhat like this on all the objects in the world. Calculate the new positions of all objects based on their current velocities, then detect collisions, and resolve those collisions with a change in momentum or force. However, each of these steps has few different widely used methods.dd
 
 ## Rigid Bodies vs Soft Bodies
+ 
+![image](/assets/images/RigidvsSoft.png)    
 
 For the first step in the loop, calculating the positions of the objects depends a lot on what those objects are, and they can generally be classified into two types. A rigid body, or a soft body. A rigid body is generally the type of object most used in physics classes.     
 
@@ -41,6 +47,9 @@ This is why I will elaborate only on rigid body dynamics.
 
 ## Movement
 
+![image](/assets/images/Movement.png)    
+
+
 For rigid bodies, the main types of motion that we need to account for are rotation and translation. Translation is simply moving the whole body in some direction along the center of mass and can be calculated by the simple equation from the velocity, d = vt.    
 
 However, there are many methods of different precisions for calculating the linear velocity as often the movement equations boil down to a series of differential equations that can't be solved directly quickly. Most physics engines use approximations like Euler's method or more accurate approximations like the Runge-Kutta methods. 
@@ -51,6 +60,8 @@ Rotating in 2D as I implemented in my own physics engine is relatively simple as
  
 ## Collision Detection
 
+![image](/assets/images/BoradvsNarrow.png)
+
 A collision is when two objects touch each other or overlap, and in most games it provokes some kind of response, whether it gives you a power-up, or the car deforms spectacularly in a car crash simulation.   
 
 Detecting the collisions is a surprising challenge, however. One obvious method is to check if all possible pairs of objects are colliding, but this method is extremely inefficient because the time it takes increases with the square of the number of objects in the world. This is why most physics engines divide the task into two parts, broad phase and narrow phase.    
@@ -60,6 +71,8 @@ In the broad phase, the focus is eliminating all objects that have no chance of 
 Then the narrow phase checks all the pairs of objects that actually have a chance of colliding. 
 
 ## Collision Resolution
+
+![image](/assets/images/Constraints.png)     
 
 The final step is collision resolution, what do we do now that we know objects are colliding.? Well in rigid bodies the basic answer is simple, they need to bounce off of each other. There are a few ways of calculating this, but all of them generally use the concept of constraints.     
 
